@@ -115,6 +115,7 @@ namespace HashTables
                 Console.WriteLine($"По ключу {elem.Key} находится {e} элементов, что составляет {val}% от всей таблицы");
                 elems.Add(val.ToString());
             }
+            //File.AppendAllLines("HashTwo.csv", elems.ToArray());
         }
         /// <summary>
         /// Считает хеш для какого-то значения, используется метод деления
@@ -123,7 +124,30 @@ namespace HashTables
         /// <returns></returns>
         public static string CalculateHash(string elem)
         {
-            return (int.Parse(elem) % 1000).ToString();
+            return HashFunctions.HashTwo(elem);
+            //return (int.Parse(elem) % 1000).ToString();
+        }
+
+        /// <summary>
+        /// Находит длину самой длинной и короткой цепочек в таблице
+        /// </summary>
+        public void FindMinMax()
+        {
+            int min = 0;
+            int max = 0;
+            foreach (var pair in table)
+            {
+                int e = pair.values.Count();
+                if (min == 0 || max == 0)
+                {
+                    min = e;
+                    max = e;
+                }
+                if (e > max) max = e;
+                if (e < min) min = e;
+            }
+            Console.WriteLine($"Длина максимальной цепочки - {max}");
+            Console.WriteLine($"Длина минимальной цепочки - {min}");
         }
     }
     public static class Task1
@@ -136,6 +160,7 @@ namespace HashTables
                 table.Insert(value);
             }
             table.CalculateOccupancy();
+            table.FindMinMax();
         }
     }
 }
