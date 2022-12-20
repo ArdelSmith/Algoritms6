@@ -17,10 +17,12 @@ namespace HashTables
             List<string> elems = new List<string>();
             for (int i = 0; i < 100000; i++)
             {
+                //Random random = new Random();
+                //const string chars = "0123456789";
+                //elems.Add(new string(Enumerable.Repeat(chars, random.Next(1, 9))
+                //    .Select(s => s[random.Next(s.Length)]).ToArray()));
                 Random random = new Random();
-                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                elems.Add(new string(Enumerable.Repeat(chars, random.Next(5, 20))
-                    .Select(s => s[random.Next(s.Length)]).ToArray()));
+                elems.Add(random.Next(1, 10000000).ToString());
             }
             File.AppendAllLines("test.csv", elems.ToArray());
         }
@@ -32,8 +34,9 @@ namespace HashTables
     }
     public class Table
     {
-        //просто константа для подсчёта хеша методом умножения
-        const double A = 0.741;
+
+        //список ключей для нашей таблицы
+        private List<string> keys = new List<string>();
 
         //фактически сама таблица
         Pair[] table;
@@ -49,13 +52,16 @@ namespace HashTables
         public void Insert(string elem)
         {
             string hash = CalculateHash(elem);
-            foreach (Pair pair in table)
+            int v = int.Parse(hash);
+            if (table[v] == null)
             {
-                if (pair.key != hash) continue;
-                else
-                {
-                    pair.values.AppendFirst(elem);
-                }
+                table[v] = new Pair();
+                table[v].key = hash;
+                table[v].values.AppendFirst(elem);
+            }
+            else
+            {
+                table[v].values.AppendFirst(elem);
             }
         }
         /// <summary>
@@ -100,26 +106,36 @@ namespace HashTables
                     count += amount;
                 }
             }
+            List<string> elems = new List<string>();
             foreach (var elem in occupancy)
             {
                 long e = elem.Value;
-                Console.WriteLine($"По ключу {elem.Key} находится {e} элементов, что составляет {e/count*100}% от всей таблицы");
+                double val = (double) e / count * 100;
+                val = Math.Round(val, 3);
+                Console.WriteLine($"По ключу {elem.Key} находится {e} элементов, что составляет {val}% от всей таблицы");
+                elems.Add(val.ToString());
             }
         }
         /// <summary>
-        /// Считает хеш для какого-то значения, используется метод умножения
+        /// Считает хеш для какого-то значения, используется метод деления
         /// </summary>
         /// <param name="elem"></param>
         /// <returns></returns>
         public static string CalculateHash(string elem)
         {
-            return null;
+            return (int.Parse(elem) % 1000).ToString();
         }
     }
     public static class Task1
     {
         public static void ExecuteTask()
         {
+            Table table = new Table();
+            foreach (var value in File.ReadLines("test.csv"))
+            {
+                table.Insert(value);
+            }
+            table.CalculateOccupancy();
         }
     }
 }
