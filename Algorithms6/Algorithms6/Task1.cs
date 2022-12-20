@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClassLibrary;
 
 namespace HashTables
 {
     public class Pair
     {
         public string key;
-        public List<string> values = new List<string>();
+        public MyList<string> values = new MyList<string>();
     }
     public class Table
     {
         Pair[] table;
         public Table()
         {
-            table = new Pair[10000];
+            table = new Pair[1000];
         }
         /// <summary>
         /// Вставляет элемент в таблицу
