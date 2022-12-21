@@ -19,5 +19,9 @@ namespace ClassLibrary
             double a = 0.61598;
             return ((int)(int.Parse(elem) * a * Math.PI * Math.Abs(Math.Tan(int.Parse(elem))) * (double)(int.Parse(elem) / 33) % 1000)).ToString();
         }
+        public static string DoubleHash(string elem)
+        {
+            return HashTwo(HashOne(elem));
+        }
     }
 }
