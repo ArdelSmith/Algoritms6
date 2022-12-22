@@ -12,7 +12,7 @@ namespace HashTables
         /// <summary>
         /// Генерирует 100000 случайных элементов
         /// </summary>
-        public void GenerateElements()
+        public void GenerateElements(string name)
         {
             List<string> elems = new List<string>();
             for (int i = 0; i < 100000; i++)
@@ -24,7 +24,15 @@ namespace HashTables
                 Random random = new Random();
                 elems.Add(random.Next(1, 10000000).ToString());
             }
-            File.AppendAllLines("test.csv", elems.ToArray());
+            if (!File.Exists(name))
+            {
+                File.AppendAllLines(name, elems.ToArray());
+            }
+            else
+            {
+                File.Delete(name);
+                File.AppendAllLines(name, elems.ToArray());
+            }
         }
     }
     public class Pair

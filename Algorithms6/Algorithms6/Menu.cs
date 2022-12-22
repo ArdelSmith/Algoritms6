@@ -3,16 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HashTables;
 
 namespace Algorithms6
 {
     public class Menu
     {
+        // если поменялся индекс кнопки выхода, менять его тут
+        int ExitButtonIndex = 2;
+
         List<string> menuItems = new List<string> {"Generate New File With Random Data",
             "Work with hash table", "Exit"};
-        public void HandleMenu()
+        /// <summary>
+        /// Запускает меню и показывает все его элементы
+        /// </summary>
+        /// <param name="start">Какой элемент начать подсвечивать первым при запуске</param>
+        public void HandleMenu(int start)
         {
-            int index = 0;
+            int index = start;
             while (true)
             {
                 for (int i = 0; i < menuItems.Count; i++)
@@ -47,6 +55,7 @@ namespace Algorithms6
                 }
                 if (e.Key == ConsoleKey.Enter)
                 {
+                    if (index == ExitButtonIndex) break;
                     ExecuteMethod(index);
                 }
                 else
@@ -64,7 +73,18 @@ namespace Algorithms6
             {
                 case 0:
                     {
-
+                        Console.WriteLine("Enter name for file with data:");
+                        string name = Console.ReadLine();
+                        if (name == null)
+                        {
+                            Console.Clear();
+                            ExecuteMethod(0);
+                        }
+                        Generator a = new Generator();
+                        a.GenerateElements(name);
+                        Console.WriteLine("File has been created!");
+                        Console.ReadKey();
+                        HandleMenu(index);
                         break;
                     }
                 case 1:
@@ -72,7 +92,7 @@ namespace Algorithms6
                         break;
                     }
                 case 2: 
-                    { 
+                    {   
                         break;
                     }
                 default:

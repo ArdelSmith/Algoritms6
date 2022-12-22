@@ -6,7 +6,7 @@ namespace HashTables
         public static void Main()
         {
             Menu e = new Menu();
-            e.HandleMenu();
+            e.HandleMenu(0);
             //Task1.ExecuteTask();
         }
     }
