@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms6", "Algorithms6\Algorithms6.csproj", "{D47A2BD8-6283-41A2-BF3D-DB5575234C2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Algorithms6", "Algorithms6\Algorithms6.csproj", "{D47A2BD8-6283-41A2-BF3D-DB5575234C2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{A049C591-B149-476E-877D-2D0F5098B812}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IvanCL", "ClassLibrary\IvanCL.csproj", "{A049C591-B149-476E-877D-2D0F5098B812}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ildan6", "..\..\..\..\Desktop\Algoritms6\Algorithms6\Algorithms6\Ildan6.csproj", "{B9E2688F-657E-4768-A947-3F65199CB289}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary", "..\..\..\..\Desktop\Algoritms6\Algorithms6\ClassLibrary\ClassLibrary.csproj", "{6121C5F3-FC5A-4191-B70C-F79FA5E5C682}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{A049C591-B149-476E-877D-2D0F5098B812}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A049C591-B149-476E-877D-2D0F5098B812}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A049C591-B149-476E-877D-2D0F5098B812}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9E2688F-657E-4768-A947-3F65199CB289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9E2688F-657E-4768-A947-3F65199CB289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9E2688F-657E-4768-A947-3F65199CB289}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9E2688F-657E-4768-A947-3F65199CB289}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6121C5F3-FC5A-4191-B70C-F79FA5E5C682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6121C5F3-FC5A-4191-B70C-F79FA5E5C682}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6121C5F3-FC5A-4191-B70C-F79FA5E5C682}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6121C5F3-FC5A-4191-B70C-F79FA5E5C682}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
