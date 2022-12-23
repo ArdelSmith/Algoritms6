@@ -12,7 +12,7 @@ namespace Algorithms6
         // если поменялся индекс кнопки выхода, менять его тут
         int ExitButtonIndex = 2;
 
-        List<string> menuItems = new List<string> {"Generate New File With Random Data",
+        List<string> MainMenuItems = new List<string> {"Generate New File With Random Data",
             "Work with hash table", "Exit"};
         /// <summary>
         /// Запускает меню и показывает все его элементы
@@ -23,21 +23,21 @@ namespace Algorithms6
             int index = start;
             while (true)
             {
-                for (int i = 0; i < menuItems.Count; i++)
+                for (int i = 0; i < MainMenuItems.Count; i++)
                 {
                     if (i == index)
                     {
                         Console.BackgroundColor = ConsoleColor.White;
                         Console.ForegroundColor = ConsoleColor.Black;
-                        Console.WriteLine(menuItems[i]);
+                        Console.WriteLine(MainMenuItems[i]);
                         Console.ResetColor();
                     }
-                    else Console.WriteLine(menuItems[i]);
+                    else Console.WriteLine(MainMenuItems[i]);
                 }
                 ConsoleKeyInfo e = Console.ReadKey();
                 if (e.Key == ConsoleKey.DownArrow)
                 {
-                    if (index == menuItems.Count - 1)
+                    if (index == MainMenuItems.Count - 1)
                     {
                         index = 0;
                     }
@@ -48,7 +48,7 @@ namespace Algorithms6
                 {
                     if (index == 0)
                     {
-                        index = menuItems.Count - 1;
+                        index = MainMenuItems.Count - 1;
                     }
                     else index--;
                     Console.Clear();
@@ -89,10 +89,11 @@ namespace Algorithms6
                     }
                 case 1:
                     {
-                        break;
-                    }
-                case 2: 
-                    {   
+                        Console.Clear();
+                        Console.WriteLine("Choose File With Data:");
+                        ShowCSVFiles();
+                        Console.Clear();
+                        HandleMenu(index);
                         break;
                     }
                 default:
@@ -101,6 +102,87 @@ namespace Algorithms6
                         break;
                     }
             }
+        }
+        private void StartHashTablesSubMenu(Table t)
+        {
+            List<string> subMenu = new List<string> { "1. Insert elem", "2. Find elem", "3. Delete elem","4. Calculate Occupancy",
+                "5. Find min and max chain", "6. Back" };
+            Console.Clear();
+            foreach (string s in subMenu)
+            {
+                Console.WriteLine(s);
+            }
+            int ans = int.Parse(Console.ReadLine());
+            switch (ans)
+            {
+                case 1:
+                    {
+                        Console.WriteLine("Enter your elem");
+                        string elem = Console.ReadLine();
+                        t.Insert(elem);
+                        Console.WriteLine($"Elem has been inserted with hash {Table.CalculateHash(elem)}");
+                        Console.ReadKey();
+                        StartHashTablesSubMenu(t);
+                        break;
+                    }
+                case 2:
+                    {
+                        Console.WriteLine("Enter your elem");
+                        string elem = Console.ReadLine();
+                        t.Find(elem);
+                        Console.ReadKey();
+                        StartHashTablesSubMenu(t);
+                        break;
+                    }
+                case 3:
+                    {
+                        Console.WriteLine("Enter your elem");
+                        string elem = Console.ReadLine();
+                        t.Delete(elem);
+                        Console.ReadKey();
+                        StartHashTablesSubMenu(t);
+                        break;
+                    }
+                case 4:
+                    {
+                        t.CalculateOccupancy();
+                        Console.ReadKey();
+                        StartHashTablesSubMenu(t);
+                        break;
+                    }
+                case 5:
+                    {
+                        t.FindMinMax();
+                        Console.ReadKey();
+                        StartHashTablesSubMenu(t);
+                        break;
+                    }
+                case 6:
+                    StartHashTablesSubMenu(t);
+                    break;
+            }
+        }
+        private int ShowCSVFiles()
+        {
+            int counter = 0;
+            DirectoryInfo d = new DirectoryInfo(Directory.GetCurrentDirectory());
+            FileInfo[] files = d.GetFiles();
+            foreach (FileInfo file in files)
+            {
+                if (file.Name.Contains(".csv"))
+                {
+                    Console.WriteLine(file.Name);
+                    counter++;
+                }
+            }
+            Console.WriteLine("Back");
+            string ans = Console.ReadLine();
+            if (!(ans == null || ans == "Back"))
+            {
+                Table t = Task1.ExecuteTask(ans);
+                StartHashTablesSubMenu(t);
+            }
+            return counter;
         }
     }
 }

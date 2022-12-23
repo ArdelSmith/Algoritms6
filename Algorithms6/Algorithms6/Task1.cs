@@ -79,14 +79,9 @@ namespace HashTables
         public void Delete(string elem)
         {
             string hash = CalculateHash(elem);
-            foreach (Pair pair in table)
-            {
-                if (pair.key != hash) continue;
-                else
-                {
-                    pair.values.Remove(elem);
-                }
-            }
+            bool e = table[int.Parse(hash)].values.Remove(elem);
+        if (e) Console.WriteLine("Element has been removed");
+            else Console.WriteLine("There is no such element in table");
         }
         /// <summary>
         /// Находит элемент в таблице
@@ -95,6 +90,15 @@ namespace HashTables
         public void Find(string elem)
         {
             string hash = CalculateHash(elem);
+            foreach (Pair pair in table)
+            {
+                if (pair.values.Contains(elem))
+                {
+                    Console.WriteLine($"Elem {elem} placed in table with hash-code {hash}");
+                }
+                else Console.WriteLine("There is no such elem in table!");
+            }
+            
         }
         /// <summary>
         /// Считает заполненность хеш-таблицы
@@ -123,7 +127,7 @@ namespace HashTables
                 Console.WriteLine($"По ключу {elem.Key} находится {e} элементов, что составляет {val}% от всей таблицы");
                 elems.Add(val.ToString());
             }
-            //File.AppendAllLines("HashTwo.csv", elems.ToArray());
+            File.AppendAllLines("HashThree.csv", elems.ToArray());
         }
         /// <summary>
         /// Считает хеш для какого-то значения, используется метод деления
@@ -133,7 +137,6 @@ namespace HashTables
         public static string CalculateHash(string elem)
         {
             return HashFunctions.HashTwo(elem);
-            //return (int.Parse(elem) % 1000).ToString();
         }
 
         /// <summary>
@@ -160,15 +163,14 @@ namespace HashTables
     }
     public static class Task1
     {
-        public static void ExecuteTask()
+        public static Table ExecuteTask(string fileName)
         {
             Table table = new Table();
-            foreach (var value in File.ReadLines("test.csv"))
+            foreach (var value in File.ReadLines(fileName))
             {
                 table.Insert(value);
             }
-            table.CalculateOccupancy();
-            table.FindMinMax();
+            return table;
         }
     }
 }
