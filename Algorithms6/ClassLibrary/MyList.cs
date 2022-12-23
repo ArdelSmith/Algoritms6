@@ -161,5 +161,43 @@ namespace ClassLibrary
                 current = current.Next;
             }
         }
+        public bool RemoveAllDuplicates(T data) // 7 метод - удаление всех дубликатов
+        {
+            Node<T> current = head;
+            Node<T> previous = null;
+
+            while (current != null)
+            {
+                if (current.Data.Equals(data))
+                {
+                    // Если узел в середине или в конце
+                    if (previous != null)
+                    {
+                        // убираем узел current, теперь previous ссылается не на current, а на current.Next
+                        previous.Next = current.Next;
+
+                        // Если current.Next не установлен, значит узел последний,
+                        // изменяем переменную tail
+                        if (current.Next == null)
+                            tail = previous;
+                    }
+                    else
+                    {
+                        // если удаляется первый элемент
+                        // переустанавливаем значение head
+                        head = head.Next;
+
+                        // если после удаления список пуст, сбрасываем tail
+                        if (head == null)
+                            tail = null;
+                    }
+                    count--;
+                }
+
+                previous = current;
+                current = current.Next;
+            }
+            return false;
+        }
     }
 }

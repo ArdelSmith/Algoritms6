@@ -158,7 +158,8 @@ namespace Algorithms6
                         break;
                     }
                 case 6:
-                    StartHashTablesSubMenu(t);
+                    Console.Clear();
+                    HandleMenu(0);
                     break;
             }
         }
