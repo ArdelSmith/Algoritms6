@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IvanCL", "ClassLibrary\Ivan
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ildan6", "..\..\..\..\Desktop\Algoritms6\Algorithms6\Algorithms6\Ildan6.csproj", "{B9E2688F-657E-4768-A947-3F65199CB289}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary", "..\..\..\..\Desktop\Algoritms6\Algorithms6\ClassLibrary\ClassLibrary.csproj", "{6121C5F3-FC5A-4191-B70C-F79FA5E5C682}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IldanCL", "..\..\..\..\Desktop\Algoritms6\Algorithms6\ClassLibrary\IldanCL.csproj", "{6121C5F3-FC5A-4191-B70C-F79FA5E5C682}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
