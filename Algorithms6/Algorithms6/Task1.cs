@@ -79,7 +79,7 @@ namespace HashTables
         public void Delete(string elem)
         {
             string hash = CalculateHash(elem);
-            bool e = table[int.Parse(hash)].values.Remove(elem);
+            bool e = table[int.Parse(hash)].values.RemoveAllDuplicates(elem);
         if (e) Console.WriteLine("Element has been removed");
             else Console.WriteLine("There is no such element in table");
         }
