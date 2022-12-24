@@ -119,8 +119,8 @@ namespace Algorithms6
                     {
                         Console.WriteLine("Enter your elem");
                         string elem = Console.ReadLine();
-                        t.Insert(elem);
-                        Console.WriteLine($"Elem has been inserted with hash {Table.CalculateHash(elem)}");
+                        t.Insert(int.Parse(elem));
+                        Console.WriteLine($"Elem has been inserted with hash {Table.CalculateHash(int.Parse(elem))}");
                         Console.ReadKey();
                         StartHashTablesSubMenu(t);
                         break;
@@ -129,7 +129,7 @@ namespace Algorithms6
                     {
                         Console.WriteLine("Enter your elem");
                         string elem = Console.ReadLine();
-                        t.Find(elem);
+                        t.Find(int.Parse(elem));
                         Console.ReadKey();
                         StartHashTablesSubMenu(t);
                         break;
@@ -138,7 +138,7 @@ namespace Algorithms6
                     {
                         Console.WriteLine("Enter your elem");
                         string elem = Console.ReadLine();
-                        t.Delete(elem);
+                        t.Delete(int.Parse(elem));
                         Console.ReadKey();
                         StartHashTablesSubMenu(t);
                         break;
