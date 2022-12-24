@@ -8,24 +8,28 @@ namespace ClassLibrary
 {
     public static class HashFunctions
     {
-        public static string UsualHash(string elem)
+        public static int UsualHash(int elem)
         {
-            return (int.Parse(elem) % 1000).ToString();
+            return (elem % 1000);
         }
-        public static string HashOne(string elem)
+        public static int HashOne(int elem)
         {
-            int e = int.Parse(elem);
-            int hash = (int) (Math.Sqrt(Math.Sqrt(e)) * 10000 % 1000);
-            return hash.ToString();
+            int hash = (int)(Math.Sqrt(Math.Sqrt(elem)) * 10000 % 1000);
+            return hash;
         }
-        public static string HashTwo(string elem)
+        public static int HashTwo(int elem)
         {
             double a = 0.61598;
-            return ((int)(int.Parse(elem) * a * Math.PI 
-                * Math.Abs(Math.Tan(int.Parse(elem))) 
-                    * (double)(int.Parse(elem) / 33) % 1000)).ToString();
+            return ((int)(elem * a * Math.PI
+                * Math.Abs(Math.Tan(elem))
+                    * (double)(elem / 33) % 1000));
         }
-        public static string DoubleHash(string elem)
+        public static int HashThree(int elem)
+        {
+            int d = elem % 18 + 1;
+            return elem % (53 * d);
+        }
+        public static int DoubleHash(int elem)
         {
             return HashTwo(HashOne(elem));
         }

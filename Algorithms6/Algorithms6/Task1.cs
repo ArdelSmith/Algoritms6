@@ -12,33 +12,29 @@ namespace HashTables
         /// <summary>
         /// Генерирует 100000 случайных элементов
         /// </summary>
-        public void GenerateElements(string name)
+        public void GenerateElements(string fileName)
         {
             List<string> elems = new List<string>();
             for (int i = 0; i < 100000; i++)
             {
-                //Random random = new Random();
-                //const string chars = "0123456789";
-                //elems.Add(new string(Enumerable.Repeat(chars, random.Next(1, 9))
-                //    .Select(s => s[random.Next(s.Length)]).ToArray()));
                 Random random = new Random();
                 elems.Add(random.Next(1, 10000000).ToString());
             }
-            if (!File.Exists(name))
+            if (!File.Exists(fileName))
             {
-                File.AppendAllLines(name, elems.ToArray());
+                File.AppendAllLines(fileName, elems.ToArray());
             }
             else
             {
-                File.Delete(name);
-                File.AppendAllLines(name, elems.ToArray());
+                File.Delete(fileName);
+                File.AppendAllLines(fileName, elems.ToArray());
             }
         }
     }
     public class Pair
     {
-        public string key;
-        public MyList<string> values = new MyList<string>();
+        public int key;
+        public MyList<int> values = new MyList<int>();
     }
     public class Table
     {
@@ -57,10 +53,10 @@ namespace HashTables
         /// Вставляет элемент в таблицу
         /// </summary>
         /// <param name="elem"></param>
-        public void Insert(string elem)
+        public void Insert(int elem)
         {
-            string hash = CalculateHash(elem);
-            int v = int.Parse(hash);
+            int hash = CalculateHash(elem);
+            int v = hash;
             if (table[v] == null)
             {
                 table[v] = new Pair();
@@ -76,10 +72,10 @@ namespace HashTables
         /// Удаляет элемент из таблицы
         /// </summary>
         /// <param name="elem"></param>
-        public void Delete(string elem)
+        public void Delete(int elem)
         {
-            string hash = CalculateHash(elem);
-            bool e = table[int.Parse(hash)].values.RemoveAllDuplicates(elem);
+            int hash = CalculateHash(elem);
+            bool e = table[hash].values.RemoveAllDuplicates(elem);
         if (e) Console.WriteLine("Element has been removed");
             else Console.WriteLine("There is no such element in table");
         }
@@ -87,9 +83,9 @@ namespace HashTables
         /// Находит элемент в таблице
         /// </summary>
         /// <param name="elem"></param>
-        public void Find(string elem)
+        public void Find(int elem)
         {
-            string hash = CalculateHash(elem);
+            int hash = CalculateHash(elem);
             foreach (Pair pair in table)
             {
                 if (pair.values.Contains(elem))
@@ -106,7 +102,7 @@ namespace HashTables
         public void CalculateOccupancy()
         {
             //записываем в словарь ключ и количество элементов, находящихся по этому ключу в таблице
-            Dictionary<string, long> occupancy = new Dictionary<string, long>();
+            Dictionary<int, long> occupancy = new Dictionary<int, long>();
             long count = 0;
             foreach (var pair in table)
             {
@@ -127,16 +123,16 @@ namespace HashTables
                 Console.WriteLine($"По ключу {elem.Key} находится {e} элементов, что составляет {val}% от всей таблицы");
                 elems.Add(val.ToString());
             }
-            File.AppendAllLines("UsualHash.csv", elems.ToArray());
+            File.AppendAllLines("HashThree.csv", elems.ToArray());
         }
         /// <summary>
         /// Считает хеш для какого-то значения, используется метод деления
         /// </summary>
         /// <param name="elem"></param>
         /// <returns></returns>
-        public static string CalculateHash(string elem)
+        public static int CalculateHash(int elem)
         {
-            return HashFunctions.UsualHash(elem);
+            return HashFunctions.HashThree(elem);
         }
 
         /// <summary>
@@ -168,7 +164,7 @@ namespace HashTables
             Table table = new Table();
             foreach (var value in File.ReadLines(fileName))
             {
-                table.Insert(value);
+                table.Insert(int.Parse(value));
             }
             return table;
         }
