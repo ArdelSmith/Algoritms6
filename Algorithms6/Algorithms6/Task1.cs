@@ -12,26 +12,22 @@ namespace HashTables
         /// <summary>
         /// Генерирует 100000 случайных элементов
         /// </summary>
-        public void GenerateElements(string name)
+        public void GenerateElements(string fileName)
         {
             List<string> elems = new List<string>();
             for (int i = 0; i < 100000; i++)
             {
-                //Random random = new Random();
-                //const string chars = "0123456789";
-                //elems.Add(new string(Enumerable.Repeat(chars, random.Next(1, 9))
-                //    .Select(s => s[random.Next(s.Length)]).ToArray()));
                 Random random = new Random();
                 elems.Add(random.Next(1, 10000000).ToString());
             }
-            if (!File.Exists(name))
+            if (!File.Exists(fileName))
             {
-                File.AppendAllLines(name, elems.ToArray());
+                File.AppendAllLines(fileName, elems.ToArray());
             }
             else
             {
-                File.Delete(name);
-                File.AppendAllLines(name, elems.ToArray());
+                File.Delete(fileName);
+                File.AppendAllLines(fileName, elems.ToArray());
             }
         }
     }
@@ -127,7 +123,7 @@ namespace HashTables
                 Console.WriteLine($"По ключу {elem.Key} находится {e} элементов, что составляет {val}% от всей таблицы");
                 elems.Add(val.ToString());
             }
-            File.AppendAllLines("UsualHash.csv", elems.ToArray());
+            //File.AppendAllLines("HashThree.csv", elems.ToArray());
         }
         /// <summary>
         /// Считает хеш для какого-то значения, используется метод деления

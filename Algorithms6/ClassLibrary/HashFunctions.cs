@@ -24,6 +24,11 @@ namespace ClassLibrary
                 * Math.Abs(Math.Tan(elem))
                     * (double)(elem / 33) % 1000));
         }
+        public static int HashThree(int elem)
+        {
+            int d = elem % 10 + 1;
+            return elem % (53 * d);
+        }
         public static int DoubleHash(int elem)
         {
             return HashTwo(HashOne(elem));
