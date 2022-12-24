@@ -26,7 +26,7 @@ namespace ClassLibrary
         }
         public static int HashThree(int elem)
         {
-            int d = elem % 10 + 1;
+            int d = elem % 18 + 1;
             return elem % (53 * d);
         }
         public static int DoubleHash(int elem)

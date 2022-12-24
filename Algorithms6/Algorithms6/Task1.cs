@@ -123,7 +123,7 @@ namespace HashTables
                 Console.WriteLine($"По ключу {elem.Key} находится {e} элементов, что составляет {val}% от всей таблицы");
                 elems.Add(val.ToString());
             }
-            //File.AppendAllLines("HashThree.csv", elems.ToArray());
+            File.AppendAllLines("HashThree.csv", elems.ToArray());
         }
         /// <summary>
         /// Считает хеш для какого-то значения, используется метод деления
@@ -132,7 +132,7 @@ namespace HashTables
         /// <returns></returns>
         public static int CalculateHash(int elem)
         {
-            return HashFunctions.UsualHash(elem);
+            return HashFunctions.HashThree(elem);
         }
 
         /// <summary>
