@@ -83,6 +83,7 @@ namespace HashTables
         if (e) Console.WriteLine("Element has been removed");
             else Console.WriteLine("There is no such element in table");
         }
+        //qwe
         /// <summary>
         /// Находит элемент в таблице
         /// </summary>
