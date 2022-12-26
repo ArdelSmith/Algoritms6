@@ -24,6 +24,7 @@ namespace ClassLibrary
                 * Math.Abs(Math.Tan(elem))
                     * (double)(elem / 33) % 1000));
         }
+        //вот эта выглядит как расчёска!
         public static int HashThree(int elem)
         {
             int d = elem % 18 + 1;

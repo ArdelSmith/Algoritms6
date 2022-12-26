@@ -18,24 +18,7 @@ namespace Algorithms6
             DoingSmth(table);
             
         }
-
-        public static void DoingSmthDh(OpenAddressHashTable table)
-        {
-            var list = new List<int>();
-            GenerationItems(list);
-            InsertAllItems(list, table);
-            var max = table.CalculatingClasterMaxLength();
-            var min = table.CalculatingClasterMinLength();
-            var average = table.CalculatingClasterAverageLength();
-            var text = table.print();
-            Console.WriteLine($"длина самого длинного кластера в таблице: {max}");
-            Console.WriteLine($"длина среднего кластера в таблице: {average}");
-            Console.WriteLine($"длина самого короткого кластера в таблице: {min}");
-        }
-
-
-
-        public static void DoingSmth(OpenAddressHashTable table)
+        private static void DoingSmth(OpenAddressHashTable table)
         {
             var list = new List<int>();
 
@@ -52,7 +35,7 @@ namespace Algorithms6
         }
 
         //Генерация 10000 элементов с различными ключами
-        public static void GenerationItems(List<int> list)
+        private static void GenerationItems(List<int> list)
         {
             var random = new Random();
 

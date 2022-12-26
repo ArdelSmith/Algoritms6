@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HashTables;
+using ClassLibrary;
 
 namespace Algorithms6
 {

@@ -10,13 +10,13 @@ namespace ClassLibrary
     {
         public HashTableItem[] Items = new HashTableItem[10000]; //все элементы будут храниться в этом массиве
         public HashTableItem DeleteSimbol = new HashTableItem(-1);
-        public int hashParam = 13; //рандом число, для того чтобы точки например (1,3) и (3,1) не давали одинаковый хэш
-        //public double rehash = 0.75;
+        public int hashParam = 13; //рандом число, для того чтобы точки, например, (1,3) и (3,1), не давали одинаковый хэш
+        public double rehash = 0.75;
         private int capacity = 10000;
-        //public int capacityCurrent;
-        //private int size;
-        //public double c1, c2 = 0.5;
-        //private static readonly int start_capacity = 8;
+        public int capacityCurrent;
+        private int size;
+        public double c1, c2 = 0.5;
+        private static readonly int start_capacity = 8;
         public List<int> ListLength = new List<int>();
 
         public HashTableItem[] GetItems() => Items;
@@ -45,13 +45,13 @@ namespace ClassLibrary
             return stepHash;
         }
 
-        //public int HashFunctionQh(int value, int i)
-        //{
-        //    double stepHash = (c1 * i + c2 * i * i) % capacity;
-        //    return (int)stepHash;
-        //}
+        public int HashFunctionQh(int value, int i)
+        {
+            double stepHash = (c1 * i + c2 * i * i) % capacity;
+            return (int)stepHash;
+        }
 
-        ////поиск элемента
+        //поиск элемента
         //public int? SearchItemDoubleHash(int key)
         //{
         //    int hash = HashFunction1(key, capacityCurrent);
@@ -68,7 +68,7 @@ namespace ClassLibrary
         //    }
         //    return null; //поиск неуспешен
         //}
-        ////вставка элемента
+        //вставка элемента
         //public void AddItemDoubleHash(int key, int value)
         //{
         //    if (rehash <= (size * 1.0 / capacityCurrent))
@@ -91,7 +91,7 @@ namespace ClassLibrary
         //    ListLength.Add(i);
         //    Items[hash] = new HashTableItem(key, value);
         //}
-        ////удаление элемента
+        //удаление элемента
         //public void DeleteItemDoubleHash(int key)
         //{
         //    int hash = HashFunction1(key, capacityCurrent);
