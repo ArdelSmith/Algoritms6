@@ -10,7 +10,7 @@ namespace ClassLibrary
     {
         public HashTableItem[] Items = new HashTableItem[10000]; //все элементы будут храниться в этом массиве
         public HashTableItem DeleteSimbol = new HashTableItem(-1);
-        public int hashParam = 13; //рандом число, для того чтобы точки, например, (1,3) и (3,1), не давали одинаковый хэш
+        public int hashParam = 13; //рандом число, для того чтобы точки, например, (1,3) и (3,1) не давали одинаковый хэш
         public double rehash = 0.75;
         private int capacity = 10000;
         public int capacityCurrent;
@@ -221,13 +221,11 @@ namespace ClassLibrary
         public int CalculatingClasterMinLength()
         {
             int min = capacity;
-
             foreach (var e in ListLength)
             {
                 if (e < min && e != 0)
                     min = e;
             }
-
             return min;
         }
 

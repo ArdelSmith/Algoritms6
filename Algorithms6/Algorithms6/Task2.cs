@@ -14,7 +14,6 @@ namespace Algorithms6
         public static void ExecuteTask()
         {
             var table = new OpenAddressHashTable(1);
-            var tableDh = new OpenAddressHashTable(2);
             DoingSmth(table);
             
         }

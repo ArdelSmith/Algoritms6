@@ -34,5 +34,21 @@ namespace ClassLibrary
         {
             return HashTwo(HashOne(elem));
         }
+        public static int OLinearHash(int elem)
+        {
+            return 0;
+        }
+        public static int OQuadroHash(int elem)
+        {
+            return 0;
+        }
+        public static int ODoubleHash(int elem)
+        {
+            return 0;
+        }
+        public static int ODoubleHashAdditional(int elem)
+        {
+            return 0;
+        }
     }
 }

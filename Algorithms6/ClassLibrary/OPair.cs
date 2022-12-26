@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    public class Pair
+    public class OPair
     {
         public int key;
-        public MyList<int> values = new MyList<int>();
+        public int value;
     }
 }
