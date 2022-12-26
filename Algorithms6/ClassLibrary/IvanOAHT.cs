@@ -17,12 +17,19 @@ namespace ClassLibrary
             table = new OPair[l];
         }
 
+        /// <summary>
+        /// Находит элемент
+        /// </summary>
+        /// <param name="elem"></param>
+        /// <param name="type">0 - linear, 1 - quadro, 2 - Double hash</param>
+        /// <returns></returns>
         public int Find(int elem, int type)
         {
             switch (type)
             {
                 case 0:
                     {
+                        //готово
                         int hash = HashFunctions.OLinearHash(elem);
                         for (int i = hash % l; i < l; i++)
                         {
@@ -33,6 +40,7 @@ namespace ClassLibrary
                     }
                 case 1:
                     {
+                        //готово
                         int hash = HashFunctions.OQuadroHash(elem);
                         int c = 0;
                         for (int i = hash % l; i < l; c++)
@@ -48,14 +56,15 @@ namespace ClassLibrary
                     }
                 case 2:
                     {
+                        //готово
                         int hash = HashFunctions.ODoubleHash(elem);
                         int c = 0;
                         for (int i = hash % l; i < l; c++)
                         {
+                            int add = HashFunctions.ODoubleHashAdditional(c);
                             if (table[i % l].value != elem)
                             {
-                                i = (hash + (c + c * c) / 2) % l;
-                                continue;
+                                i = (hash + add * i) % l;
                             }
                             else return i;
                         }

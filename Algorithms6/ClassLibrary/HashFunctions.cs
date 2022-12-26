@@ -48,7 +48,7 @@ namespace ClassLibrary
         }
         public static int ODoubleHashAdditional(int elem)
         {
-            return 0;
+            return elem % 9998 + 1;
         }
     }
 }

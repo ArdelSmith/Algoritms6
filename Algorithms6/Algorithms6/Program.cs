@@ -1,12 +1,13 @@
 ﻿using Algorithms6;
+using ClassLibrary;
 namespace HashTables
 {
     public class Program
     {
         public static void Main()
         {
-            Menu e = new Menu();
-            e.HandleMenu(0);
+            Generator e = new Generator();
+            e.GeneratePairedElements("paired.csv");
         }
     }
 }
