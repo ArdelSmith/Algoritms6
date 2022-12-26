@@ -29,12 +29,16 @@ namespace ClassLibrary
                 File.AppendAllLines(fileName, elems.ToArray());
             }
         }
+        /// <summary>
+        /// Генерирует 100000 случайных элементов в виде пар ключ-значение, ни там ни там повторов нет
+        /// </summary>
+        /// <param name="fileName"></param>
         public void GeneratePairedElements(string fileName)
         {
             List<string> keys = new List<string>();
             List<string> values = new List<string>();
             List<string> n = new List<string>();
-            for (int i = 0; i < 100000; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 Random random = new Random();
                 int k = random.Next(1, 10000000);
