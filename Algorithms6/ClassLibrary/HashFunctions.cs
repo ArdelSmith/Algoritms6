@@ -32,23 +32,11 @@ namespace ClassLibrary
         }
         public static int DoubleHash(int elem)
         {
-            return HashTwo(HashOne(elem));
-        }
-        public static int OLinearHash(int elem)
-        {
-            return 0;
-        }
-        public static int OQuadroHash(int elem)
-        {
-            return 0;
-        }
-        public static int ODoubleHash(int elem)
-        {
-            return 0;
+            return UsualHash(HashOne(elem));
         }
         public static int ODoubleHashAdditional(int elem)
         {
-            return elem % 9998 + 1;
+            return (int) Math.Pow(3, elem % 10);
         }
     }
 }

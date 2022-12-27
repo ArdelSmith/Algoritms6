@@ -8,13 +8,17 @@ namespace ClassLibrary
 {
     public class IvanOAHT
     {
-        bool[] Deleted = new bool[10000];
+        bool[] UnDeleted = new bool[10000];
         private const int K = 1;
-        OPair[] table;
+        public OPair[] table;
         int l = 10000;
         public IvanOAHT()
         {
             table = new OPair[l];
+            for (int i = 0; i < table.Length; i++)
+            {
+                table[i] = new OPair();
+            }
         }
 
         /// <summary>
@@ -30,7 +34,7 @@ namespace ClassLibrary
                 case 0:
                     {
                         // Линейное исследование
-                        int hash = HashFunctions.HashTwo(elem);
+                        int hash = HashFunctions.UsualHash(elem);
                         for (int i = hash % l; i < l; i++)
                         {
                             if (i > 9999) throw new Exception();
@@ -42,7 +46,7 @@ namespace ClassLibrary
                 case 1:
                     {
                         // Квадратичное исследование
-                        int hash = HashFunctions.HashTwo(elem);
+                        int hash = HashFunctions.UsualHash(elem);
                         int c = 0;
                         for (int i = hash % l; i < l; c++)
                         {
@@ -59,11 +63,11 @@ namespace ClassLibrary
                 case 2:
                     {
                         // Двойное хеширование
-                        int hash = HashFunctions.ODoubleHash(elem);
+                        int hash = HashFunctions.DoubleHash(elem);
                         int c = 0;
                         for (int i = hash % l; i < l; c++)
                         {
-                            int add = HashFunctions.DoubleHash(c);
+                            int add = HashFunctions.ODoubleHashAdditional(c);
                             if (i > 9999) throw new Exception();
                             if (table[i % l].value != elem)
                             {
@@ -83,15 +87,17 @@ namespace ClassLibrary
                 case 0:
                     {
                         // Линейное исследование
-                        int hash = HashFunctions.HashTwo(key);
+                        int hash = HashFunctions.UsualHash(key);
                         for (int i = hash % l; i < l; i++)
                         {
-                            if (i > 9999) throw new Exception();
-                            if (!Deleted[i]) continue;
+                            if (i > 9999) i = i % 10000;
+                            if (UnDeleted[i]) continue;
                             else
                             {
+                                table[i] = new OPair();
                                 table[i].key = key;
                                 table[i].value = value;
+                                UnDeleted[i] = true;
                                 break;
                             }
                         }
@@ -100,20 +106,22 @@ namespace ClassLibrary
                 case 1:
                     {
                         // Квадратичное исследование
-                        int hash = HashFunctions.HashTwo(key);
+                        int hash = HashFunctions.UsualHash(key);
                         int c = 1;
                         for (int i = hash % l; i < l; c *= c)
                         {
-                            if (i > 9999) throw new Exception();
-                            if (!Deleted[i])
+                            if (i > 9999) i = i % 10000;
+                            if (UnDeleted[i])
                             {
                                 i = i + c;
                                 continue;
                             }
                             else
                             {
+                                table[i] = new OPair();
                                 table[i].key = key;
                                 table[i].value = value;
+                                UnDeleted[i] = true;
                                 break;
                             }
                         }
@@ -122,15 +130,92 @@ namespace ClassLibrary
                 case 2:
                     {
                         // Двойное хеширование
-                        int hash = HashFunctions.ODoubleHash(key);
+                        int hash = HashFunctions.UsualHash(key);
+                        int add = HashFunctions.HashTwo(key);
+                        for (int i = 0; i < l; i++)
+                        {
+                            if (i > 9999) i = i % 10000;
+                            if (UnDeleted[i])
+                            {
+                                i = (hash + add * i) % l;
+                            }
+                            else
+                            {
+                                table[i] = new OPair();
+                                table[i].key = key;
+                                table[i].value = value;
+                                UnDeleted[i] = true;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+            }
+        }
+        public void Delete(int key, int type)
+        {
+            switch (type)
+            {
+                case 0:
+                    {
+                        // Линейное исследование
+                        int hash = HashFunctions.UsualHash(key);
+                        for (int i = hash % l; i < l; i++)
+                        {
+                            if (i > 9999) throw new Exception();
+                            if (UnDeleted[i]) continue;
+                            else
+                            {
+                                table[i] = new OPair();
+                                table[i].value = -1;
+                                UnDeleted[i] = true;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                case 1:
+                    {
+                        // Квадратичное исследование
+                        int hash = HashFunctions.UsualHash(key);
+                        int c = 1;
+                        for (int i = hash % l; i < l; c *= c)
+                        {
+                            if (i > 9999) throw new Exception();
+                            if (UnDeleted[i])
+                            {
+                                i = i + c;
+                                continue;
+                            }
+                            else
+                            {
+                                table[i] = new OPair();
+                                table[i].value = -1;
+                                UnDeleted[i] = true;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        // Двойное хеширование
+                        int hash = HashFunctions.DoubleHash(key);
                         int c = 0;
                         for (int i = hash % l; i < l; c++)
                         {
-                            int add = HashFunctions.DoubleHash(c);
+                            int add = HashFunctions.ODoubleHashAdditional(c);
                             if (i > 9999) throw new Exception();
                             if (table[i % l].value != key)
                             {
                                 i = (hash + add * i) % l;
+                            }
+                            else
+                            {
+                                table[i] = new OPair();
+                                table[i].value = -1;
+                                UnDeleted[i] = true;
+                                break;
                             }
                         }
                         break;
