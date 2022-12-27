@@ -13,7 +13,7 @@ namespace HashTables
             foreach (string line in lines)
             {
                 string[] d = line.Split(";");
-                ivanOAHT.Insert(int.Parse(d[0]), int.Parse(d[1]), 2);
+                ivanOAHT.Insert(int.Parse(d[0]), int.Parse(d[1]), 0);
             }
             Console.WriteLine(ivanOAHT.table.Count);
             ivanOAHT.FindMinMax();

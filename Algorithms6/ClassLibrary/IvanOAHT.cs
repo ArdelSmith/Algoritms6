@@ -120,6 +120,7 @@ namespace ClassLibrary
                             if (i > 9999) i = i % 10000;
                             if (table.ContainsKey(i))
                             {
+                                if (c == 1) c++;
                                 i = i + c;
                                 count++;
                                 continue;
