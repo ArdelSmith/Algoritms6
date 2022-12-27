@@ -16,6 +16,7 @@ namespace HashTables
                 ivanOAHT.Insert(int.Parse(d[0]), int.Parse(d[1]), 2);
             }
             Console.WriteLine(ivanOAHT.table.Count);
+            ivanOAHT.FindMinMax();
         }
     }
 }
