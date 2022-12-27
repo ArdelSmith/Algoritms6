@@ -16,62 +16,69 @@ namespace ClassLibrary
         /// <summary>
         /// Находит элемент
         /// </summary>
-        /// <param name="elem"></param>
+        /// <param name="key"></param>
         /// <param name="type">0 - linear, 1 - quadro, 2 - Double hash</param>
         /// <returns></returns>
-        //public int Find(int elem, int type)
-        //{
-        //    switch (type)
-        //    {
-        //        case 0:
-        //            {
-        //                // Линейное исследование
-        //                int hash = HashFunctions.UsualHash(elem);
-        //                for (int i = hash % l; i < l; i++)
-        //                {
-        //                    if (i > 9999) throw new Exception();
-        //                    if (table[i % l].value != elem) continue;
-        //                    else return i;
-        //                }
-        //                break;
-        //            }
-        //        case 1:
-        //            {
-        //                // Квадратичное исследование
-        //                int hash = HashFunctions.UsualHash(elem);
-        //                int c = 0;
-        //                for (int i = hash % l; i < l; c++)
-        //                {
-        //                    if (i > 9999) throw new Exception();
-        //                    if (table[i % l].value != elem)
-        //                    {
-        //                        i = (hash + (c + c * c)/2) % l;
-        //                        continue;
-        //                    }
-        //                    else return i;
-        //                }
-        //                break;
-        //            }
-        //        case 2:
-        //            {
-        //                // Двойное хеширование
-        //                int hash = HashFunctions.DoubleHash(elem);
-        //                int c = 0;
-        //                for (int i = hash % l; i < l; c++)
-        //                {
-        //                    int add = HashFunctions.ODoubleHashAdditional(c);
-        //                    if (i > 9999) throw new Exception();
-        //                    if (table[i % l].value != elem)
-        //                    {
-        //                        i = (hash + add * i) % l;
-        //                    }
-        //                    else return i;
-        //                }
-        //                break;
-        //            }
-        //    }
-        //    return 0;
-        //}
+        public int Find(int key, int type)
+        {
+            switch (type)
+            {
+                case 0:
+                    {
+                        // Линейное исследование
+                        int hash = HashFunctions.UsualHash(key);
+                        for (int i = hash % l; i < l; i++)
+                        {
+                            if (i > 9999) i = i % 10000;
+                            if (table.ContainsKey(i)) continue;
+                            else
+                            {
+                                return i;
+                            }
+                        }
+                        break;
+                    }
+                case 1:
+                    {
+                        // Квадратичное исследование
+                        int hash = HashFunctions.UsualHash(key);
+                        int c = 1;
+                        for (int i = hash % l; i < l; c *= c)
+                        {
+                            if (i > 9999) i = i % 10000;
+                            if (table.ContainsKey(i))
+                            {
+                                i = i + c;
+                                continue;
+                            }
+                            else
+                            {
+                                return i;
+                            }
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        // Двойное хеширование
+                        int hash = HashFunctions.Bebra(key);
+                        int add = HashFunctions.ODoubleHashAdditional(key);
+                        for (int i = 0; i < l; i++)
+                        {
+                            if (!table.ContainsKey(hash))
+                            {
+                                return hash;
+                            }
+                            else if (!table.ContainsKey(hash + i * add))
+                            {
+                                return hash + i * add;
+                            }
+                        }
+                        throw new IndexOutOfRangeException();
+                    }
+            }
+            return 0;
+        }
         public void Insert(int key, int value, int type)
         {
             switch (type)
@@ -83,11 +90,10 @@ namespace ClassLibrary
                         for (int i = hash % l; i < l; i++)
                         {
                             if (i > 9999) i = i % 10000;
-                            if (!table.ContainsKey(hash)) continue;
+                            if (table.ContainsKey(i)) continue;
                             else
                             {
-                                table.Add(hash, value);
-                                UnDeleted[i] = true;
+                                table.Add(i, value);
                                 break;
                             }
                         }
@@ -101,15 +107,14 @@ namespace ClassLibrary
                         for (int i = hash % l; i < l; c *= c)
                         {
                             if (i > 9999) i = i % 10000;
-                            if (table.ContainsKey(hash))
+                            if (table.ContainsKey(i))
                             {
                                 i = i + c;
                                 continue;
                             }
                             else
                             {
-                                table.Add(hash, value);
-                                UnDeleted[i] = true;
+                                table.Add(i, value);
                                 break;
                             }
                         }

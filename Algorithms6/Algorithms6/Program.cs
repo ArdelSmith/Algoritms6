@@ -12,15 +12,10 @@ namespace HashTables
             int c = 0;
             foreach (string line in lines)
             {
-                c++;
-                Console.WriteLine(c);
                 string[] d = line.Split(";");
                 ivanOAHT.Insert(int.Parse(d[0]), int.Parse(d[1]), 2);
             }
-            foreach (var elem in ivanOAHT.table)
-            {
-                Console.WriteLine(elem.Key);
-            }
+            Console.WriteLine(ivanOAHT.table.Count);
         }
     }
 }
