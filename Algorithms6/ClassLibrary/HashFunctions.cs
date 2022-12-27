@@ -34,9 +34,26 @@ namespace ClassLibrary
         {
             return UsualHash(HashOne(elem));
         }
+        public static int GetSum(int elem)
+        {
+            int b = elem;
+            int c = 0;
+            string e = elem.ToString();
+            for (int i = 0; i < e.Length; i++)
+            {
+                int t = b % 10;
+                c += t;
+                b /= 10;
+            }
+            return c;
+        }
+        public static int Bebra(int elem)
+        {
+            return Math.Abs(GetSum(elem) % 10000);
+        }
         public static int ODoubleHashAdditional(int elem)
         {
-            return (int) Math.Pow(3, elem % 10);
+            return Math.Abs(GetSum(elem) % (1000 - 1) + 1);
         }
     }
 }

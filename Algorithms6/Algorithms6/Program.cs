@@ -17,9 +17,9 @@ namespace HashTables
                 string[] d = line.Split(";");
                 ivanOAHT.Insert(int.Parse(d[0]), int.Parse(d[1]), 2);
             }
-            for (int i = 0; i < lines.Length; i++)
+            foreach (var elem in ivanOAHT.table)
             {
-                Console.WriteLine(ivanOAHT.table[i].key);
+                Console.WriteLine(elem.Key);
             }
         }
     }
