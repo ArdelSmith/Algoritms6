@@ -92,25 +92,18 @@ namespace ClassLibrary
                     {
                         // Линейное исследование
                         int hash = HashFunctions.UsualHash(key);
+                        int count = 1;
                         for (int i = hash % l; i < l; i++)
                         {
                             if (i > 9999) i = i % 10000;
                             if (table.ContainsKey(i)) {
-                                if (clusters.ContainsKey(i))
-                                {
-                                    clusters[i] += 1;
-                                }
-                                else clusters[i] = 1;
+                                count++;
                                 continue;
                             }
                             else
                             {
                                 table.Add(i, value);
-                                if (clusters.ContainsKey(i))
-                                {
-                                    clusters[i] += 1;
-                                }
-                                else clusters[i] = 1;
+                                clusters.Add(i, count);
                                 break;
                             }
                         }
@@ -120,28 +113,21 @@ namespace ClassLibrary
                     {
                         // Квадратичное исследование
                         int hash = HashFunctions.UsualHash(key);
+                        int count = 1;
                         int c = 1;
                         for (int i = hash % l; i < l; c *= c)
                         {
                             if (i > 9999) i = i % 10000;
                             if (table.ContainsKey(i))
                             {
-                                if (clusters.ContainsKey(i))
-                                {
-                                    clusters[i] += 1;
-                                }
-                                else clusters[i] = 1;
                                 i = i + c;
+                                count++;
                                 continue;
                             }
                             else
                             {
                                 table.Add(i, value);
-                                if (clusters.ContainsKey(i))
-                                {
-                                    clusters[i] += 1;
-                                }
-                                else clusters[i] = 1;
+                                clusters.Add(i, count);
                                 break;
                             }
                         }
