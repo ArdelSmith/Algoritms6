@@ -21,7 +21,8 @@ namespace Algorithms6
         public void HandleMenu(int start)
         {
             int index = start;
-            while (true)
+            bool flag = true;
+            while (flag)
             {
                 for (int i = 0; i < MainMenuItems.Count; i++)
                 {
@@ -55,7 +56,13 @@ namespace Algorithms6
                 }
                 if (e.Key == ConsoleKey.Enter)
                 {
-                    ExecuteMethod(index);
+                    if (index == ExitButtonIndex)
+                    {
+                        flag = false;
+                        Abort();
+                        Console.Clear();
+                    }
+                    else ExecuteMethod(index);
                 }
                 else
                 {
@@ -63,6 +70,7 @@ namespace Algorithms6
                 }
             }
         }
+        private void Abort() { }
         /// <summary>
         /// Выполняет метод, выбранный в меню
         /// </summary>

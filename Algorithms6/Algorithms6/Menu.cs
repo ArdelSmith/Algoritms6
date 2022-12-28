@@ -21,8 +21,9 @@ namespace Algorithms6
         /// <param name="start">Какой элемент начать подсвечивать первым при запуске</param>
         public void HandleMenu(int start)
         {
+            bool flag = true;
             int index = start;
-            while (true)
+            while (flag)
             {
                 for (int i = 0; i < MainMenuItems.Count; i++)
                 {
@@ -56,7 +57,14 @@ namespace Algorithms6
                 }
                 if (e.Key == ConsoleKey.Enter)
                 {
-                    ExecuteMethod(index);
+                    if (index == ExitButtonIndex)
+                    {
+                        flag = false;
+                        Abort();
+                        Console.Clear();
+                    }
+                    else ExecuteMethod(index);
+
                 }
                 else
                 {
@@ -64,6 +72,7 @@ namespace Algorithms6
                 }
             }
         }
+        private void Abort() { }
         /// <summary>
         /// Выполняет метод, выбранный в меню
         /// </summary>
@@ -98,8 +107,8 @@ namespace Algorithms6
                     }
                 case 2:
                     {
-                        Console.Clear();
                         PreMenu e = new PreMenu();
+                        Console.Clear();
                         e.HandleMenu(0);
                         break;
                     }
@@ -165,7 +174,8 @@ namespace Algorithms6
                     }
                 case 6:
                     Console.Clear();
-                    HandleMenu(0);
+                    PreMenu d = new PreMenu();
+                    d.HandleMenu(0);
                     break;
             }
         }
