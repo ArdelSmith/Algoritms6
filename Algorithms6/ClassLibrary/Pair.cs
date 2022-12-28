@@ -9,6 +9,6 @@ namespace ClassLibrary
     public class Pair
     {
         public int key;
-        public MyList<int> values;
+        public MyList<int> values = new MyList<int>();
     }
 }

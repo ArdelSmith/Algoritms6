@@ -18,11 +18,6 @@ namespace ClassLibrary
         public Table()
         {
             table = new Pair[1000];
-            for (int i = 0; i < table.Length; i++)
-            {
-                table[i] = new Pair();
-                table[i].values = new MyList<int>();
-            }
         }
         /// <summary>
         /// Вставляет элемент в таблицу
@@ -64,17 +59,13 @@ namespace ClassLibrary
             bool flag = false;
             foreach (Pair pair in table)
             {
-                try
+                if (pair != null)
                 {
                     if (pair.values.Contains(elem))
                     {
                         Console.WriteLine($"Elem {elem} placed in table with hash-code {hash}");
                         flag = true;
                     }
-                }
-                catch
-                {
-                    Console.WriteLine(pair.key);
                 }
             }
             if (!flag) Console.WriteLine("There is no such elem in table!");
@@ -87,14 +78,19 @@ namespace ClassLibrary
             //записываем в словарь ключ и количество элементов, находящихся по этому ключу в таблице
             Dictionary<int, long> occupancy = new Dictionary<int, long>();
             long count = 0;
+            int c = 0;
             foreach (var pair in table)
             {
-                if (pair == null) continue;
+                if (pair == null) {
+                    occupancy.Add(c, 0);
+                    c++;
+                }
                 else
                 {
                     long amount = pair.values.Count;
                     occupancy.Add(pair.key, amount);
                     count += amount;
+                    c++;
                 }
             }
             List<string> elems = new List<string>();
@@ -127,14 +123,17 @@ namespace ClassLibrary
             int max = 0;
             foreach (var pair in table)
             {
-                int e = pair.values.Count();
-                if (min == 0 || max == 0)
+                if (pair != null)
                 {
-                    min = e;
-                    max = e;
+                    int e = pair.values.Count();
+                    if (min == 0 || max == 0)
+                    {
+                        min = e;
+                        max = e;
+                    }
+                    if (e > max) max = e;
+                    if (e < min) min = e;
                 }
-                if (e > max) max = e;
-                if (e < min) min = e;
             }
             Console.WriteLine($"Длина максимальной цепочки - {max}");
             Console.WriteLine($"Длина минимальной цепочки - {min}");
