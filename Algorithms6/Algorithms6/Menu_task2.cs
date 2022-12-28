@@ -139,7 +139,11 @@ namespace Algorithms6
                         Console.WriteLine("Enter your elem");
                         int value = int.Parse(Console.ReadLine());
                         ans = t.Find(key, value, 2);
-                        Console.WriteLine($"Your elem has hash {ans}");
+                        if (ans != -1)
+                        {
+                            Console.WriteLine($"Your elem has hash {ans}");
+                        }
+                        else Console.WriteLine("There is no such elem in table!");
                         Console.ReadKey();
                         StartHashTablesSubMenu(t);
                         break;
@@ -151,7 +155,11 @@ namespace Algorithms6
                         Console.WriteLine("Enter your elem");
                         int value = int.Parse(Console.ReadLine());
                         int a = t.Delete(key, value, 2);
-                        Console.WriteLine($"Elem with hash {a} has been deleted");
+                        if (a == -1)
+                        {
+                            Console.WriteLine("There is no such elem in table!");
+                        }
+                        else Console.WriteLine($"Elem with hash {a} has been deleted");
                         Console.ReadKey();
                         StartHashTablesSubMenu(t);
                         break;
@@ -184,6 +192,11 @@ namespace Algorithms6
             }
             Console.WriteLine("Back");
             string ans = Console.ReadLine();
+            if (int.Parse(ans) == 0)
+            {
+                IvanOAHT t = new IvanOAHT();
+                StartHashTablesSubMenu(t);
+            }
             if (!(ans == null || ans == "Back"))
             {
                 IvanOAHT t = new IvanOAHT();

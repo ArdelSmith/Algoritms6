@@ -38,7 +38,7 @@ namespace ClassLibrary
                             }
                             else continue;
                         }
-                        break;
+                        return -1;
                     }
                 case 1:
                     {
@@ -59,7 +59,7 @@ namespace ClassLibrary
                                 continue;
                             }
                         }
-                        break;
+                        return -1;
                     }
                 case 2:
                     {
@@ -73,13 +73,13 @@ namespace ClassLibrary
                                 int k = table[hash];
                                 if (k == value) return hash;
                             }
-                            else if (!table.ContainsKey(hash + i * add))
+                            else if (table.ContainsKey(hash + i * add))
                             {
                                 int k = table[hash + i * add];
                                 if (k == value) return hash + i * add;
                             }
                         }
-                        throw new IndexOutOfRangeException();
+                        return -1;
                     }
             }
             return 0;
@@ -191,7 +191,7 @@ namespace ClassLibrary
                             }
                             else continue;
                         }
-                        break;
+                        return -1;
                     }
                 case 1:
                     {
@@ -217,6 +217,7 @@ namespace ClassLibrary
                                 continue;
                             }
                         }
+                        return -1;
                         break;
                     }
                 case 2:
@@ -236,7 +237,7 @@ namespace ClassLibrary
                                 }
                                 return hash;
                             }
-                            else if (!table.ContainsKey(hash + i * add))
+                            else if (table.ContainsKey(hash + i * add))
                             {
                                 int k = table[hash + i * add];
                                 if (k == value)
@@ -247,7 +248,7 @@ namespace ClassLibrary
                                 return hash + i * add;
                             }
                         }
-                        throw new IndexOutOfRangeException();
+                        return -1;
                     }
             }
             return 0;

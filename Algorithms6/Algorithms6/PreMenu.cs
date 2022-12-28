@@ -84,10 +84,15 @@ namespace Algorithms6
                     }
                 case 2:
                     {
-                        return;
+                        Abort();
+                        break;
                     }
                 default: throw new IndexOutOfRangeException();
             }
+        }
+        public void Abort()
+        {
+
         }
     }
 }
