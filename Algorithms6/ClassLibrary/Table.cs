@@ -18,6 +18,11 @@ namespace ClassLibrary
         public Table()
         {
             table = new Pair[1000];
+            for (int i = 0; i < table.Length; i++)
+            {
+                table[i] = new Pair();
+                table[i].values = new MyList<int>();
+            }
         }
         /// <summary>
         /// Вставляет элемент в таблицу
@@ -45,7 +50,7 @@ namespace ClassLibrary
         public virtual void Delete(int elem)
         {
             int hash = CalculateHash(elem);
-            bool e = table[hash].values.RemoveAllDuplicates(elem);
+            bool e = table[hash].values.Remove(elem);
             if (e) Console.WriteLine("Element has been removed");
             else Console.WriteLine("There is no such element in table");
         }
@@ -56,15 +61,23 @@ namespace ClassLibrary
         public virtual void Find(int elem)
         {
             int hash = CalculateHash(elem);
+            bool flag = false;
             foreach (Pair pair in table)
             {
-                if (pair.values.Contains(elem))
+                try
                 {
-                    Console.WriteLine($"Elem {elem} placed in table with hash-code {hash}");
+                    if (pair.values.Contains(elem))
+                    {
+                        Console.WriteLine($"Elem {elem} placed in table with hash-code {hash}");
+                        flag = true;
+                    }
                 }
-                else Console.WriteLine("There is no such elem in table!");
+                catch
+                {
+                    Console.WriteLine(pair.key);
+                }
             }
-
+            if (!flag) Console.WriteLine("There is no such elem in table!");
         }
         /// <summary>
         /// Считает заполненность хеш-таблицы

@@ -17,8 +17,8 @@ namespace HashTables
             //}
             //Console.WriteLine(ivanOAHT.table.Count);
             //ivanOAHT.FindMinMax();
-            MenuTask2 task = new MenuTask2();
-            task.HandleMenu(0);
+            PreMenu e = new PreMenu();
+            e.HandleMenu(0);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Algorithms6
         int ExitButtonIndex = 2;
 
         List<string> MainMenuItems = new List<string> {"Generate New File With Random Data",
-            "Work with hash table", "Exit"};
+            "Work with hash table", "Back"};
         /// <summary>
         /// Запускает меню и показывает все его элементы
         /// </summary>
@@ -55,7 +55,6 @@ namespace Algorithms6
                 }
                 if (e.Key == ConsoleKey.Enter)
                 {
-                    if (index == ExitButtonIndex) break;
                     ExecuteMethod(index);
                 }
                 else
@@ -94,6 +93,13 @@ namespace Algorithms6
                         ShowCSVFiles();
                         Console.Clear();
                         HandleMenu(index);
+                        break;
+                    }
+                case 2:
+                    {
+                        Console.Clear();
+                        PreMenu e = new PreMenu();
+                        e.HandleMenu(0);
                         break;
                     }
                 default:
