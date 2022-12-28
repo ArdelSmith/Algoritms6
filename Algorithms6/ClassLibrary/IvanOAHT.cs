@@ -70,8 +70,8 @@ namespace ClassLibrary
                         {
                             if (table.ContainsKey(hash))
                             {
-                                int k = table[i];
-                                if (k == value) return i;
+                                int k = table[hash];
+                                if (k == value) return hash;
                             }
                             else if (!table.ContainsKey(hash + i * add))
                             {
@@ -182,7 +182,11 @@ namespace ClassLibrary
                             if (table.ContainsKey(i))
                             {
                                 int k = table[i];
-                                if (k == value) table.Remove(i);
+                                if (k == value)
+                                {
+                                    table.Remove(i);
+                                    clusters.Remove(i);
+                                }
                                 return i;
                             }
                             else continue;
@@ -200,7 +204,11 @@ namespace ClassLibrary
                             if (table.ContainsKey(i))
                             {
                                 int k = table[i];
-                                if (k == value) table.Remove(i);
+                                if (k == value)
+                                {
+                                    table.Remove(i);
+                                    clusters.Remove(i);
+                                }
                                 return i;
                             }
                             else
@@ -220,15 +228,23 @@ namespace ClassLibrary
                         {
                             if (table.ContainsKey(hash))
                             {
-                                int k = table[i];
-                                if (k == value) table.Remove(i);
-                                return i;
+                                int k = table[hash];
+                                if (k == value)
+                                {
+                                    table.Remove(hash);
+                                    clusters.Remove(hash);
+                                }
+                                return hash;
                             }
                             else if (!table.ContainsKey(hash + i * add))
                             {
                                 int k = table[hash + i * add];
-                                if (k == value) table.Remove(i);
-                                return i;
+                                if (k == value)
+                                {
+                                    table.Remove(hash + i * add);
+                                    clusters.Remove(hash + i * add);
+                                }
+                                return hash + i * add;
                             }
                         }
                         throw new IndexOutOfRangeException();

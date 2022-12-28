@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HashTables;
 using ClassLibrary;
 
 namespace Algorithms6
 {
-    public class Menu
+    public class MenuTask2
     {
         // если поменялся индекс кнопки выхода, менять его тут
         int ExitButtonIndex = 2;
@@ -82,7 +81,7 @@ namespace Algorithms6
                             ExecuteMethod(0);
                         }
                         Generator a = new Generator();
-                        a.GenerateElements(name);
+                        a.GeneratePairedElements(name);
                         Console.WriteLine("File has been created!");
                         Console.ReadKey();
                         HandleMenu(index);
@@ -103,10 +102,10 @@ namespace Algorithms6
                     }
             }
         }
-        private void StartHashTablesSubMenu(Table t)
+        private void StartHashTablesSubMenu(IvanOAHT t)
         {
-            List<string> subMenu = new List<string> { "1. Insert elem", "2. Find elem", "3. Delete elem","4. Calculate Occupancy",
-                "5. Find min and max chain", "6. Back" };
+            List<string> subMenu = new List<string> { "1. Insert elem", "2. Find elem", "3. Delete elem",
+                "4. Find min and max clusters", "5. Back" };
             Console.Clear();
             foreach (string s in subMenu)
             {
@@ -117,47 +116,48 @@ namespace Algorithms6
             {
                 case 1:
                     {
+                        Console.WriteLine("Enter key");
+                        int key = int.Parse(Console.ReadLine());
                         Console.WriteLine("Enter your elem");
-                        string elem = Console.ReadLine();
-                        t.Insert(int.Parse(elem));
-                        Console.WriteLine($"Elem has been inserted with hash {Table.CalculateHash(int.Parse(elem))}");
+                        int value = int.Parse(Console.ReadLine());
+                        t.Insert(key, value, 2);
+                        Console.WriteLine($"Elem has been inserted");
                         Console.ReadKey();
                         StartHashTablesSubMenu(t);
                         break;
                     }
                 case 2:
                     {
+                        Console.WriteLine("Enter key");
+                        int key = int.Parse(Console.ReadLine());
                         Console.WriteLine("Enter your elem");
-                        string elem = Console.ReadLine();
-                        t.Find(int.Parse(elem));
+                        int value = int.Parse(Console.ReadLine());
+                        ans = t.Find(key, value, 2);
+                        Console.WriteLine($"Your elem has hash {ans}");
                         Console.ReadKey();
                         StartHashTablesSubMenu(t);
                         break;
                     }
                 case 3:
                     {
+                        Console.WriteLine("Enter key");
+                        int key = int.Parse(Console.ReadLine());
                         Console.WriteLine("Enter your elem");
-                        string elem = Console.ReadLine();
-                        t.Delete(int.Parse(elem));
+                        int value = int.Parse(Console.ReadLine());
+                        int a = t.Delete(key, value, 2);
+                        Console.WriteLine($"Elem with hash {a} has been deleted");
                         Console.ReadKey();
                         StartHashTablesSubMenu(t);
                         break;
                     }
                 case 4:
                     {
-                        t.CalculateOccupancy();
-                        Console.ReadKey();
-                        StartHashTablesSubMenu(t);
-                        break;
-                    }
-                case 5:
-                    {
                         t.FindMinMax();
                         Console.ReadKey();
                         StartHashTablesSubMenu(t);
                         break;
                     }
-                case 6:
+                case 5:
                     Console.Clear();
                     HandleMenu(0);
                     break;
@@ -180,7 +180,12 @@ namespace Algorithms6
             string ans = Console.ReadLine();
             if (!(ans == null || ans == "Back"))
             {
-                Table t = Task1.ExecuteTask(ans);
+                IvanOAHT t = new IvanOAHT();
+                foreach (var line in File.ReadLines(ans))
+                {
+                    string[] l = line.Split(";");
+                    t.Insert(int.Parse(l[0]), int.Parse(l[1]), 2);
+                }
                 StartHashTablesSubMenu(t);
             }
             return counter;
